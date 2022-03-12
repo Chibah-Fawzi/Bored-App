@@ -50,9 +50,13 @@ button {
 }
 .input-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
+.inputs {
+  display: flex;
+}
 .inputs input {
   margin: 10px;
 }
@@ -129,4 +133,28 @@ form button,
 
 input {
   background-color: aliceblue;
+}
+
+@media only screen and (max-width: 850px) {
+  input {
+    width: 50%;
+  }
+  .filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .filter-wrapper .activity-type {
+    width: 100%;
+    align-items: center;
+  }
+  .filter-wrapper .activity-type input,
+  .filter-wrapper .activity-type select {
+    margin: 10px 0;
+    width: 100%;
+  }
+  .w-100 {
+    width: 80% !important;
+  }
 }
