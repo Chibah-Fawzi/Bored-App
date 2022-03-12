@@ -6,9 +6,9 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 
 function App(props) {
-  const [currentActivity, setCurrentActivity] = useState({});
-
   const savedFavories = localStorage.getItem('favories')
+  const [currentActivity, setCurrentActivity] = useState({});
+  const [showFavorite, setShowFavorite] = useState(false);
 
   const [activity, setActivity] = useState({
     title: '',
@@ -72,23 +72,14 @@ function App(props) {
     localStorage.setItem("favories", JSON.stringify(...favActivities, currentActivity))
   }
   useEffect(() => {
+    if (savedFavories) {
+      setFavActivities([JSON.parse(savedFavories)])
+    }
     getActivity();
   }, [newActivity, activity]);
 
   return (
     <div className='container'>
-
-      <BrowserRouter>
-        <nav>
-          <Link to='/favorite'>Favorite</Link>
-          <Link to='/'>Home</Link>
-        </nav>
-        <Routes>
-          <Route path='home' element={<App />} />
-          <Route path="favorite" component={Favorite} element={<Favorite setFavActivities={setFavActivities} favActivities={favActivities} types={types} />
-          } />
-        </Routes>
-      </BrowserRouter>
 
       <h1>Find an activity!</h1>
       <div className='activity'>
@@ -114,6 +105,9 @@ function App(props) {
         </div>
       </form>
 
+      <button style={{ marginTop: '20vh' }} className='btn' onClick={() => setShowFavorite(!showFavorite)}>Show My Favorites</button>
+      {showFavorite ?
+        <Favorite setFavActivities={setFavActivities} favActivities={favActivities} types={types} /> : ""}
     </div>
   )
 }
