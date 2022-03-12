@@ -22,15 +22,19 @@ nav :first-child {
   text-decoration: none !important;
   margin: 0 20px;
 }
+button {
+  cursor: pointer;
+}
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 100%;
 }
 
 .container h1 {
-  color: #12216b;
+  color: aliceblue;
 }
 
 .activity {
@@ -40,7 +44,7 @@ nav :first-child {
 }
 
 .activity h3 button,
-.activity-type select {
+select {
   background: none;
   border: 1px solid #ffcc70;
   color: #12216b;
@@ -71,7 +75,7 @@ nav :first-child {
   color: aliceblue;
 }
 
-form input,
+input,
 form button {
   padding: 10px;
   border: 1px solid #12216b;
@@ -79,6 +83,6 @@ form button {
   margin: 0 10px;
 }
 
-form input {
+input {
   background-color: aliceblue;
 }

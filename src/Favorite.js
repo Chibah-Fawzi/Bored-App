@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './App.css';
 
 export default function Favorite(query) {
     const { favActivities, types } = query
@@ -20,21 +21,26 @@ export default function Favorite(query) {
 
 
     return (
-        <div>
+        <div className='container'>
             <h1>Favorites</h1>
-            <input onChange={e => searchFav(e)} type="search" />
-            <select onChange={e => filterFav(e)}>
-                {types.map((e, i) => {
-                    return <option key={i}>{e}</option>
-                })}
-            </select>
+            <div className='input-wrap'>
+                <input placeholder='Search your activities' onChange={e => searchFav(e)} type="search" />
+                <select onChange={e => filterFav(e)}>
+                    {types.map((e, i) => {
+                        return <option key={i}>{e}</option>
+                    })}
+                </select>
+            </div>
 
+            <h1>Favorite activities</h1>
             <ul>
-                {filteredData === [] ? filteredData.map(e => <li>{e.activity}</li>) :
-                    searchedData !== "" ? <li>{searchedData} <button>Remove</button></li> :
-                        favActivities.map(e => {
-                            return <li>{e?.activity} <button>Remove</button></li>
-                        })
+                {
+                    favActivities === [] ? <li>No favorite activities</li> :
+                        filteredData === [] ? filteredData.map(e => <li>{e.activity}</li>) :
+                            searchedData !== "" ? <li>{searchedData} <button>Remove</button></li> :
+                                favActivities.map(e => {
+                                    return <li>{e?.activity} <button>Remove</button></li>
+                                })
                 }
             </ul>
         </div>
