@@ -71,10 +71,13 @@ function App(props) {
     }
     localStorage.setItem("favories", JSON.stringify(...favActivities, currentActivity))
   }
+
   useEffect(() => {
     if (savedFavories) {
       setFavActivities([JSON.parse(savedFavories)])
     }
+  }, []);
+  useEffect(() => {
     getActivity();
   }, [newActivity, activity]);
 
@@ -84,6 +87,7 @@ function App(props) {
       <button className='btn' onClick={() => setShowFavorite(!showFavorite)}>Show My Favorites</button>
       {showFavorite ?
         <Favorite setFavActivities={setFavActivities} favActivities={favActivities} types={types} /> : ""}
+
       <div className='filter-wrapper'>
         <div className='activity-type'>
           <label>Select an activity type</label>
