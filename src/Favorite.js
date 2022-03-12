@@ -33,10 +33,11 @@ export default function Favorite(query) {
                 {filteredData === [] ? filteredData.map(e => <li>{e.activity}</li>) :
                     searchedData !== "" ? <li>{searchedData} <button>Remove</button></li> :
                         favActivities.map(e => {
-                            return <li>{e.activity} <button>Remove</button></li>
+                            return <li>{e?.activity} <button>Remove</button></li>
                         })
                 }
             </ul>
         </div>
+
     )
 }

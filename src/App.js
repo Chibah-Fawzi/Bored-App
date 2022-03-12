@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Favorite from './components/Favorite';
+import Favorite from './Favorite';
 import axios from 'axios'
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
-function App() {
+
+function App(props) {
   const [currentActivity, setCurrentActivity] = useState({});
+
+  const savedFavories = localStorage.getItem('favories')
 
   const [activity, setActivity] = useState({
     title: '',
@@ -22,10 +25,14 @@ function App() {
 
   const types = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
 
+
   const getActivity = () => {
     axios.get(`http://www.boredapi.com/api/activity?type=${activity
       .type}&?minprice=${activity.minPrice}&maxprice=${activity.maxPrice}`)
-      .then(response => setCurrentActivity(response.data))
+      .then(response => {
+        setCurrentActivity(response.data)
+        localStorage.setItem("Activity", response.data)
+      })
       .catch(err => console.log(err))
   }
   const getRandomActivity = (e) => {
@@ -59,11 +66,11 @@ function App() {
   const addToFav = (e) => {
     e.preventDefault();
     const found = favActivities.find(e => e.activity === currentActivity.activity)
-    if (!found) { setFavActivities([...favActivities, currentActivity]) }
+    if (!found) {
+      setFavActivities([...favActivities, currentActivity])
+    }
+    localStorage.setItem("favories", JSON.stringify(...favActivities, currentActivity))
   }
-
-
-
   useEffect(() => {
     getActivity();
   }, [newActivity, activity]);
@@ -71,14 +78,18 @@ function App() {
   return (
     <div className='container'>
 
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <nav>
-          <Link to='/favorite' props={favActivities}>Favorite</Link>
+          <Link to='/favorite'>Favorite</Link>
+          <Link to='/'>Home</Link>
         </nav>
         <Routes>
-          <Route path="favorite" component={Favorite} element={<Favorite />} />
+          <Route path='home' element={<App />} />
+          <Route path="favorite" component={Favorite} element={<Favorite favActivities={favActivities} types={types} />
+          } />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
+
       <h1>Find an activity!</h1>
       <h5>{currentActivity.activity} <button onClick={(e) => addToFav(e)}>Add to favorites</button></h5>
       <button onClick={(e) => getRandomActivity(e)}>Find another activity</button>
@@ -95,8 +106,6 @@ function App() {
         <button type='submit'>Select a price range</button>
       </form>
 
-
-      <Favorite favActivities={favActivities} types={types} />
     </div>
   )
 }
