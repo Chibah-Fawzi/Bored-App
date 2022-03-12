@@ -23,15 +23,21 @@ export default function Favorite(query) {
         setFavActivities(favActivities.filter((e) => e.activity !== activity))
     }
     return (
-        <div className='container'>
+        <div className='container favorites'>
             <h1>Favorites</h1>
-            <div className='input-wrap'>
-                <input placeholder='Search your activities' onChange={e => searchFav(e)} type="search" />
-                <select onChange={e => filterFav(e)}>
-                    {types.map((e, i) => {
-                        return <option key={i}>{e}</option>
-                    })}
-                </select>
+            <div className='filter-wrapper w-100'>
+                <div className='activity-type '>
+                    <label>Search by activities</label>
+                    <input placeholder='Search your activities' onChange={e => searchFav(e)} type="search" />
+                </div>
+                <div className='activity-type '>
+                    <label>Filter by type</label>
+                    <select onChange={e => filterFav(e)}>
+                        {types.map((e, i) => {
+                            return <option key={i}>{e}</option>
+                        })}
+                    </select>
+                </div>
             </div>
 
             <h1>Favorite activities</h1>

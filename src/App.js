@@ -81,33 +81,43 @@ function App(props) {
   return (
     <div className='container'>
 
-      <h1>Find an activity!</h1>
+      <button className='btn' onClick={() => setShowFavorite(!showFavorite)}>Show My Favorites</button>
+      {showFavorite ?
+        <Favorite setFavActivities={setFavActivities} favActivities={favActivities} types={types} /> : ""}
+      <div className='filter-wrapper'>
+        <div className='activity-type'>
+          <label>Select an activity type</label>
+          <select onChange={(e) => getActivityType(e)}>
+            {types.map((e, i) => {
+              return <option key={i}>{e}</option>
+            })}
+          </select>
+        </div>
+        <form onSubmit={getPriceRange} className='activity-price-range'>
+          <label>Select a price range</label>
+          <div className='input-wrap'>
+            <div className='inputs'>
+              <div>
+                <label>Min Price</label>
+                <input placeholder='Minimum Price' step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={0} type='number' name="min" />
+              </div>
+              <div>
+                <label>Max Price</label>
+                <input placeholder='Maximum Price' step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={1} type='number' name="max" />
+              </div>
+            </div>
+            <button type='submit'>Select a price range</button>
+          </div>
+        </form>
+      </div>
+
       <div className='activity'>
+        <h1>Find an activity!</h1>
         <h3>{currentActivity.activity}
           <button onClick={(e) => addToFav(e)}>♥</button>
         </h3>
         <button className='btn' onClick={(e) => getRandomActivity(e)}>Find another activity</button>
       </div>
-      <div className='activity-type'>
-        <h1>Select an activity type</h1>
-        <select onChange={(e) => getActivityType(e)}>
-          {types.map((e, i) => {
-            return <option key={i}>{e}</option>
-          })}
-        </select>
-      </div>
-      <form onSubmit={getPriceRange} className='activity-price-range'>
-        <h1>Select a price range</h1>
-        <div className='input-wrap'>
-          <input placeholder='Minimum Price' step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={0} type='number' name="min" />
-          <input placeholder='Maximum Price' step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={1} type='number' name="max" />
-          <button type='submit'>Select a price range</button>
-        </div>
-      </form>
-
-      <button style={{ marginTop: '20vh' }} className='btn' onClick={() => setShowFavorite(!showFavorite)}>Show My Favorites</button>
-      {showFavorite ?
-        <Favorite setFavActivities={setFavActivities} favActivities={favActivities} types={types} /> : ""}
     </div>
   )
 }
