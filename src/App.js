@@ -27,7 +27,7 @@ function App(props) {
 
 
   const getActivity = () => {
-    axios.get(`http://www.boredapi.com/api/activity?type=${activity
+    axios.get(`https://www.boredapi.com/api/activity?type=${activity
       .type}&?minprice=${activity.minPrice}&maxprice=${activity.maxPrice}`)
       .then(response => {
         setCurrentActivity(response.data)
