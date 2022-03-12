@@ -91,19 +91,27 @@ function App(props) {
       </BrowserRouter>
 
       <h1>Find an activity!</h1>
-      <h5>{currentActivity.activity} <button onClick={(e) => addToFav(e)}>Add to favorites</button></h5>
-      <button onClick={(e) => getRandomActivity(e)}>Find another activity</button>
-      <h1>Select an activity type</h1>
-      <select onChange={(e) => getActivityType(e)}>
-        {types.map((e, i) => {
-          return <option key={i}>{e}</option>
-        })}
-      </select>
-
-      <form onSubmit={getPriceRange}>
-        <input step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={0} type='number' name="min" />
-        <input step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={1} type='number' name="max" />
-        <button type='submit'>Select a price range</button>
+      <div className='activity'>
+        <h3>{currentActivity.activity}
+          <button onClick={(e) => addToFav(e)}>♥</button>
+        </h3>
+        <button className='btn' onClick={(e) => getRandomActivity(e)}>Find another activity</button>
+      </div>
+      <div className='activity-type'>
+        <h1>Select an activity type</h1>
+        <select onChange={(e) => getActivityType(e)}>
+          {types.map((e, i) => {
+            return <option key={i}>{e}</option>
+          })}
+        </select>
+      </div>
+      <form onSubmit={getPriceRange} className='activity-price-range'>
+        <h1>Select a price range</h1>
+        <div className='input-wrap'>
+          <input placeholder='Minimum Price' step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={0} type='number' name="min" />
+          <input placeholder='Maximum Price' step={0.05} onChange={(e) => limitPriceRange(e)} defaultValue={1} type='number' name="max" />
+          <button type='submit'>Select a price range</button>
+        </div>
       </form>
 
     </div>

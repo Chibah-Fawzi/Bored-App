@@ -1,5 +1,84 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+nav {
+  margin: 10px 0;
+}
+nav :last-child,
+nav :first-child {
+  text-decoration: none !important;
+  margin: 0 20px;
+}
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+}
+
+.container h1 {
+  color: #12216b;
+}
+
+.activity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activity h3 button,
+.activity-type select {
+  background: none;
+  border: 1px solid #ffcc70;
+  color: #12216b;
+  font-size: 20px;
+  padding: 10px;
+  margin: 0 20px;
+}
+.activity-type select {
+  color: #fff;
+}
+.activity-type option {
+  color: #12216b;
+}
+.activity h3 button:hover {
+  background-color: #ffcc70;
+}
+
+.activity .btn {
+  padding: 20px;
+  background-color: transparent;
+  border: 1px solid #12216b;
+  font-size: large;
+  text-transform: uppercase;
+  margin-bottom: 10vh;
+}
+.activity .btn:hover {
+  background: #12216b;
+  color: aliceblue;
+}
+
+form input,
+form button {
+  padding: 10px;
+  border: 1px solid #12216b;
+  background: none;
+  margin: 0 10px;
+}
+
+form input {
+  background-color: aliceblue;
 }
