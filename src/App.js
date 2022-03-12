@@ -85,7 +85,7 @@ function App(props) {
         </nav>
         <Routes>
           <Route path='home' element={<App />} />
-          <Route path="favorite" component={Favorite} element={<Favorite favActivities={favActivities} types={types} />
+          <Route path="favorite" component={Favorite} element={<Favorite setFavActivities={setFavActivities} favActivities={favActivities} types={types} />
           } />
         </Routes>
       </BrowserRouter>

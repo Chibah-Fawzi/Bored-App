@@ -76,11 +76,20 @@ select {
 }
 
 input,
-form button {
+form button,
+.btn {
   padding: 10px;
   border: 1px solid #12216b;
   background: none;
   margin: 0 10px;
+}
+
+#delete {
+  border: 1px solid red;
+  color: white;
+}
+#delete:hover {
+  background-color: red;
 }
 
 input {
