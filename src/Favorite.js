@@ -8,18 +8,17 @@ export default function Favorite(query) {
     const [filteredData, setFilteredData] = useState([]);
     const searchFav = (event) => {
         let value = event.currentTarget.value
+        let found = favActivities.find(e => e.activity.toLowerCase().match(value.toLowerCase().toString()))
         value === "" ? setSearchedData("") :
-            setSearchedData(favActivities.find(e => e.activity.toLowerCase().match(value.toLowerCase())))
+            setSearchedData(found)
     }
 
     const filterFav = (event) => {
         let filter = favActivities.filter(e => e.type === event.currentTarget.value)
         setFilteredData(filter)
-        console.log(filter);
     }
 
     const removeFav = (activity) => {
-        console.log(activity);
         setFavActivities(favActivities.filter((e) => e.activity !== activity))
     }
     return (
@@ -44,8 +43,8 @@ export default function Favorite(query) {
             <ul>
                 {
                     favActivities === [] ? <li>No favorite activities</li> :
-                        filteredData === [] ? filteredData.map(e => <li>{e.activity}</li>) :
-                            searchedData !== "" ? <li>{searchedData}</li> :
+                        filteredData === [] ? filteredData.map(e => <li>{e?.activity}</li>) :
+                            searchedData !== "" ? <li>{searchedData?.activity}</li> :
                                 favActivities.map((e, i) => {
                                     return <li>{e?.activity} <button className='btn' id="delete" onClick={() => removeFav(favActivities[i].activity)}>Remove</button></li>
                                 })
